@@ -12,15 +12,11 @@ namespace GalloFlix.Data;
     }
 
     public DbSet<AppUser> AppUsers { get; set; }
-        
     public DbSet<Genre> Genres { get; set; }
     public DbSet<Movie> Movies { get; set; }
-
     public DbSet<MovieComment> MovieComments { get; set; }
-
     public DbSet<MovieGenre>  MovieGenres { get; set; }
-        
-     public DbSet<MovieRating> MovieRatings { get; set; }
+    public DbSet<MovieRating> MovieRatings { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
      {
@@ -95,6 +91,11 @@ namespace GalloFlix.Data;
 
         builder.Entity<MovieRating>()
         .HasOne(mr => mr.Movie)
+        .WithMany(m => m.Ratings)
+        .HasForeignKey(mr => mr.MovieId);
+
+        builder.Entity<MovieRating>()
+        .HasOne(mr => mr.User)
         .WithMany(m => m.Ratings)
         .HasForeignKey(mr => mr.UserId);
         #endregion

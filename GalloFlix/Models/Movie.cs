@@ -9,6 +9,7 @@ public class Movie
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
+    
     [Display(Name = "Titulo")]
     [Required(ErrorMessage = "O Título é obrigatório")]
     [StringLength(100, ErrorMessage = " O Título deve possuir no maximo 100 caracteres")]

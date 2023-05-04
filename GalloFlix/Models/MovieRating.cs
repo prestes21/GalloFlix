@@ -11,7 +11,7 @@ namespace GalloFlix.Models;
         [ForeignKey("MovieId")]
         public Movie Movie { get; set; } // propriedade de navegação
 
-        [Required]
+        [Key, Column(Order = 2)]
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public AppUser User { get; set; }
