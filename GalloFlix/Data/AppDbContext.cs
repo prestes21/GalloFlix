@@ -21,6 +21,7 @@ namespace GalloFlix.Data;
     protected override void OnModelCreating(ModelBuilder builder)
      {
         base.OnModelCreating(builder);
+        AppDbseed seed = new(builder);
 
          //fluent API
         //Personalizar as tabelas do Identity
