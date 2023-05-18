@@ -324,6 +324,26 @@ namespace GalloFlix.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "24c978ab-02bc-4ba3-95ec-08716755a711", "ff1ec0e6-e571-4c4d-bcf0-1b188eeaeed2", "Moderador", "MODERADOR" },
+                    { "7a7c75b5-d834-4433-afb7-6fdec024d940", "3232e627-a037-4786-825c-cb915e30a14a", "Usuário", "USUÁRIO" },
+                    { "eec985cd-0f7e-4827-a824-feb9a03c371b", "4f48f720-d6d2-4ea7-a728-88778b4d831d", "Administrador", "ADMINISTRADOR" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateOfBirth", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePicture", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "e6273fa1-b5f1-4127-9037-0abba9714bbc", 0, "b640d17c-34d2-4b6b-b440-24ebcf69c2af", new DateTime(2006, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "AppUser", "bianca2102prestes@gmail.com", true, false, null, "Bianca Pereira Prestes", "BIANCA2102PRESTES@GMAIL.COM", "WANNABI", "AQAAAAEAACcQAAAAELoPXJKNzWSnCDjugJqCLc/6/fKhrzagrujpDR79ez4jDvNU6t8HCfcbjjAuTaAJ8g==", "1499645-8482", true, "/img/users/avatar.png", "5b72f526-7bfd-49a0-9c65-2016ec3a4d1b", false, " Wannabi" });
+
+            migrationBuilder.InsertData(
+                table: "UserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "eec985cd-0f7e-4827-a824-feb9a03c371b", "e6273fa1-b5f1-4127-9037-0abba9714bbc" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_MovieComment_MovieId",
                 table: "MovieComment",

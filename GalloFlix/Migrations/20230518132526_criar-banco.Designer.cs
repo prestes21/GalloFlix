@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GalloFlix.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230511132945_popular-usuario")]
-    partial class popularusuario
+    [Migration("20230518132526_criar-banco")]
+    partial class criarbanco
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -174,22 +174,22 @@ namespace GalloFlix.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "015078d3-f9c8-4d20-862d-c4c30dfd82cf",
-                            ConcurrencyStamp = "706d7f06-cc90-4cd0-8fd4-eed02d4eb938",
+                            Id = "eec985cd-0f7e-4827-a824-feb9a03c371b",
+                            ConcurrencyStamp = "4f48f720-d6d2-4ea7-a728-88778b4d831d",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "f37ba23c-309a-4863-8cfb-503131e9fcd1",
-                            ConcurrencyStamp = "433ef22f-a14a-4800-bf7f-35a2b8c59d22",
+                            Id = "24c978ab-02bc-4ba3-95ec-08716755a711",
+                            ConcurrencyStamp = "ff1ec0e6-e571-4c4d-bcf0-1b188eeaeed2",
                             Name = "Moderador",
                             NormalizedName = "MODERADOR"
                         },
                         new
                         {
-                            Id = "694468e2-5a9f-4f19-80ee-7bb4dd87a623",
-                            ConcurrencyStamp = "4aca7d01-b984-4bf8-b03e-65a19d1086f9",
+                            Id = "7a7c75b5-d834-4433-afb7-6fdec024d940",
+                            ConcurrencyStamp = "3232e627-a037-4786-825c-cb915e30a14a",
                             Name = "Usuário",
                             NormalizedName = "USUÁRIO"
                         });
@@ -350,8 +350,8 @@ namespace GalloFlix.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "96e5a1da-6a3a-4ded-8eeb-77526182bd0a",
-                            RoleId = "015078d3-f9c8-4d20-862d-c4c30dfd82cf"
+                            UserId = "e6273fa1-b5f1-4127-9037-0abba9714bbc",
+                            RoleId = "eec985cd-0f7e-4827-a824-feb9a03c371b"
                         });
                 });
 
@@ -395,18 +395,18 @@ namespace GalloFlix.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "96e5a1da-6a3a-4ded-8eeb-77526182bd0a",
+                            Id = "e6273fa1-b5f1-4127-9037-0abba9714bbc",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "466445b1-004a-41a2-a2b0-91288740624f",
+                            ConcurrencyStamp = "b640d17c-34d2-4b6b-b440-24ebcf69c2af",
                             Email = "bianca2102prestes@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "BIANCA2102PRESTES@GMAIL.COM",
                             NormalizedUserName = "WANNABI",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF9hPZ4H053XuRI0cntgz8+Gas5pFFcjKhFofiCfROlrxvd/sN/umQG69UpRHHWkHQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELoPXJKNzWSnCDjugJqCLc/6/fKhrzagrujpDR79ez4jDvNU6t8HCfcbjjAuTaAJ8g==",
                             PhoneNumber = "1499645-8482",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "a4ff7268-cb83-4654-8e73-a031f28ab1a5",
+                            SecurityStamp = "5b72f526-7bfd-49a0-9c65-2016ec3a4d1b",
                             TwoFactorEnabled = false,
                             UserName = " Wannabi",
                             DateOfBirth = new DateTime(2006, 2, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),

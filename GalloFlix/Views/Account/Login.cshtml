@@ -5,5 +5,27 @@
 
 <div class="text-center">
     <h1 class="display-4">Login</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">Área Administrativa</a>.</p>
 </div>
+@* Taghelper - Auxiliar de tag*@
+<form method="post" class="col-md-6 offset-md-3"> @* deita o formulário de login com tamanho médio, centralizado-offset- (utiliza 6 barras, a tela tem 12, 3  é o centro das 6 linhas que estamos usando)*@
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" >
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label"></label>
+        <input asp-for="Password" class="form-control">
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="mb-3 form-check">
+        <input asp-for="RemenberMe" class="form-check-input">
+        <label asp-for="RemenberMe" class="form-check-label"></label>
+    </div>
+    <button type="submit" class="btn btn-primary">Entrar</button>
+    </form>
+
+@section Scripts {
+    <partial name="_ValidadetionScriptsPartial"></partial>
+}
