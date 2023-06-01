@@ -1,8 +1,16 @@
-html, body{
-    height: 100%;
+main {
+    height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.border-text {
+form {
+    width: 400px;
+}
+
+.border-text,
+.border-text-register {
     position: relative;
     margin-top: 30px;
     height: 25px;
@@ -10,13 +18,19 @@ html, body{
     color: black;
 }
 
-.border-text::after {
+.border-text::after,
+.border-text-register::after {
     content: "Novo por Aqui?";
     position: absolute;
     background-color: white;
     top: -13px;
     left: 33.3%;
     padding: 0 10px;
+}
+
+.border-text-register::after {
+    content: "Já possui uma conta?" !important;
+    left: 28% !important;
 }
 
 .forgetPassword{
