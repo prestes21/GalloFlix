@@ -17,9 +17,9 @@ public class EmailSender : IEmailSender
         MailMessage message = new();
         message.From = new MailAddress(fromMail);
         message.Subject = subject;
-        message.To.Add(new MailAddress());
+        message.To.Add(new MailAddress(email));
         message.Body = "<html><body>" + htmlMessage + "</body></html>";
-        messgae.IsBodyHtml = true;
+        message.IsBodyHtml = true;
         var smtpClient = new SmtpClient("smtp-mail.outlook.com")
         {
             Port = 587,

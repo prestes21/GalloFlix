@@ -1,5 +1,6 @@
 using GalloFlix.Data;
 using GalloFlix.Models;
+using GalloFlix.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddIdentity<AppUser, IdentityRole>()  //Deixa claro onde será armazenados os dados;
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();                                
+
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 var app = builder.Build();
 

@@ -1,6 +1,9 @@
 using System.Net.Mail;
+using System.Text;
+using System.Text.Encodings.Web;
 using GalloFlix.DataTransferObjects;
 using GalloFlix.Models;
+using GalloFlix.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +18,7 @@ public class AccountController : Controller
     private readonly UserManager<AppUser> _userManager;
     private readonly IUserStore<AppUser> _userStore;
     private readonly IUserEmailStore<AppUser> _emailStore;
-    private readonly IEmailSender<AppUser> _emailSender;
+    private readonly IEmailSender _emailSender;
 
     public AccountController(
         ILogger<AccountController> logger,
@@ -31,7 +34,7 @@ public class AccountController : Controller
         _userStore = userStore;
         _emailStore = (IUserEmailStore<AppUser>)_userStore;
         _emailSender = emailSender;
-        
+
     }
 
     [Authorize(Roles = "Administrador")]
@@ -89,12 +92,12 @@ public class AccountController : Controller
         return View();
     }
 
-     [HttpPost]
-    public async IActionResult Register(RegisterDto register)
+    [HttpPost]
+    public async Task<IActionResult> Register(RegisterDto register)
     {
-        if (ModelState.IsValid) 
+        if (ModelState.IsValid)
         {
-            var user = Acticvator.CreateInstance<AppUser>();
+            var user = Activator.CreateInstance<AppUser>();
 
             user.Name = register.Name;
             user.DateOfBirth = register.DateOfBirth;
@@ -112,25 +115,42 @@ public class AccountController : Controller
                 user, register.Password
             );
 
-        if (result.Succeeded)
-        {
-            _logger.LogInformation($"Novo usuário registrado com o email {user.Email}");
+            if (result.Succeeded)
+            {
+                _logger.LogInformation($"Novo usuário registrado com o email {user.Email}");
 
-            var userId = await _userManager.GetUserIdAsync(user); 
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-            var callbackUrl = Url.Action(
-                "ConfirmEmail", "Account",
-                new { userId = userId, code = code },
-                protocol: Request.Scheme 
-            );
-            
+                var userId = await _userManager.GetUserIdAsync(user);
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var callbackUrl = Url.Action(
+                    "ConfirmEmail", "Account",
+                    new { userId = userId, code = code },
+                    protocol: Request.Scheme
+                );
+
+                await _userManager.AddToRoleAsync(user, "Usuário");
+
+                await _emailSender.SendEmailAsync(
+                    register.Email, "GalloFlix - Criação de Conta",
+                    $"Por favor, confirme a criação da sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Clicando aqui</a>"
+
+                );
+
+                return RedirectToAction("RegisterConfirmation");
+            }
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(
+                    string.Empty, error.Description
+                );
+            }
         }
-
+        return View(register);
     }
-    return View(register);
-
-    
+    public IActionResult RegisterConfirmation()
+    {
+        return View();
+    }
     private bool IsValidEmail(string email)
     {
         try
